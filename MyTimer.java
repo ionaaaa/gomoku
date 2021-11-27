@@ -2,23 +2,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MyTimer {
-    public static void main(String[] args) {
-        Calendar c;
-        c = Calendar.getInstance();
+    private Calendar c = Calendar.getInstance();
+    private long endtime = c.getTimeInMillis();
+    private Date date = new Date();
+    private long starttime = date.getTime();
+    private long midtime = (endtime - starttime) / 1000;
+    private int time;
+
+    MyTimer(int time){
+        this.time = time;
         c.set(2021, 11, 24, 0, 0, 0);
-        long endtime = c.getTimeInMillis();
-        Date date = new Date();
-        long starttime = date.getTime();
-        long midtime = (endtime - starttime) / 1000;
-        // basic settings
-
-
-        time(60);
-        time(600);
-
     }
 
-    private static void time(int time){
+    public void timer(){
         while (time > 0){
             time--;
             try {
@@ -33,4 +29,11 @@ public class MyTimer {
             }
         }
     }
+
+    public static void main(String[] args) {
+        MyTimer myTimer = new MyTimer(60);
+        myTimer.timer();
+    }
+
+
 }
