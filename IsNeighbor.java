@@ -36,8 +36,8 @@ public class IsNeighbor {
     }
 
     public boolean CrossUpNeighbor(){
-        if (XNeighbor()){
-            if (YNeighbor()){
+        if (c1.getX() - c2.getX() == sidelength || c2.getX() - c1.getX() == sidelength){
+            if (c1.getY() - c2.getY() == sidelength || c2.getY() - c1.getY() == sidelength){
                 ArrayList<Chess> chesses = new ArrayList<>();
                 chesses.add(c1);
                 chesses.add(c2);
@@ -56,8 +56,8 @@ public class IsNeighbor {
     }//check this
 
     public boolean CrossDownNeighbor(){
-        if (XNeighbor()){
-            if (YNeighbor()){
+        if (c1.getX() - c2.getX() == sidelength || c2.getX() - c1.getX() == sidelength){
+            if (c1.getY() - c2.getY() == sidelength || c2.getY() - c1.getY() == sidelength){
                 ArrayList<Chess> chesses = new ArrayList<>();
                 chesses.add(c1);
                 chesses.add(c2);
@@ -76,10 +76,27 @@ public class IsNeighbor {
     }
 
     public static void main(String[] args) {
-        Chess c1 = new Chess(1,1);
-        Chess c2 = new Chess(0,1);
-        IsNeighbor isNeighbor = new IsNeighbor(c1,c2,1);
-        System.out.println(isNeighbor.XNeighbor());
+        Chess c1 = new Chess(0,1);
+        Chess c2 = new Chess(0,0);
+        Chess c3 = new Chess(0,2);
+
+        boolean isY3 = false;
+        ArrayList<Chess> chesses = new ArrayList<>();
+        chesses.add(c1);
+        chesses.add(c2);
+        chesses.add(c3);
+        Collections.sort(chesses, new Comparator<Chess>() {
+            @Override
+            public int compare(Chess o1, Chess o2) {
+                return o1.getY() - o2.getY();
+            }
+        });
+        IsNeighbor isNeighborTester1 = new IsNeighbor(chesses.get(0),chesses.get(1),1);
+        IsNeighbor isNeighborTester2 = new IsNeighbor(chesses.get(1),chesses.get(2),1);
+        if (isNeighborTester1.YNeighbor() && isNeighborTester2.YNeighbor()){
+            isY3 = true;
+        }
+        System.out.println(isY3);
     }
 
 

@@ -131,12 +131,12 @@ public class TestWin {
         // see if 5 chesses is y=-x win
 
 
-        public boolean isWin() {
-            if (isXwin || isYwin || isCrossUpwin || isCrossDownwin) {
-                p = true;
-            }
-            return p;
-        }
+//        public boolean isWin() {
+//            if (isXwin || isYwin || isCrossUpwin || isCrossDownwin) {
+//                p = true;
+//            }
+//            return p;
+//        }
 
 
 
@@ -149,7 +149,7 @@ public class TestWin {
         int a = 1;
 
         TestWin testWin = new TestWin(c1,c2,c3,c4,c5,a);
-        System.out.println(testWin.isCrossUpwin);
+        System.out.println(testWin.CrossUpwin());
 
 
 
