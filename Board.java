@@ -75,7 +75,34 @@ public class Board {
     }
     //判断状态，有没有出现赢的情况
 
-    //做33禁
+    public boolean is33Ban(){
+        final Tool[][] b = board;
+        boolean ban = false;
+        int[] countInFourDirections = new int[4];
+        Tool toolInTheGrid = board[x][y];
+        countInFourDirections[0] = checkCount(1,0,toolInTheGrid);
+        countInFourDirections[1] = checkCount(0,1,toolInTheGrid);
+        countInFourDirections[2] = checkCount(1,1,toolInTheGrid);
+        countInFourDirections[3] = checkCount(1,-1,toolInTheGrid);
+        if (countInFourDirections[0] == 3){
+            if (countInFourDirections[1] == 3 || countInFourDirections[2] == 3 || countInFourDirections[3] == 3){
+                ban = true;
+            }
+        }
+        else if (countInFourDirections[0] != 3 && countInFourDirections[1] == 3){
+            if (countInFourDirections[2] == 3 || countInFourDirections[3] == 3){
+                ban = true;
+            }
+        }
+        else if (countInFourDirections[0] != 3 && countInFourDirections[1] != 3 && countInFourDirections[2] == 3){
+            if (countInFourDirections[3] == 3){
+                ban = true;
+            }
+        }
+        return ban;
+    }
+    //33禁，是连三，不知道做不做跳三
+
 
     public boolean isFull() {
         for (int i = 0; i < SIZE; i++) {
@@ -92,9 +119,20 @@ public class Board {
     public boolean isValid(Move move) {
         int r = move.getRow();
         int c = move.getColumn();
-        return board[r - 1][c - 1] == Tool.EMPTY;
+        boolean valid = false;
+        if (board[r - 1][c - 1] == Tool.EMPTY){
+            if (move.getTool() == Tool.WHITE){
+                valid = true;
+            }
+            else if (move.getTool() == Tool.BLACK){
+                if (!is33Ban()){
+                    valid = true;
+                }
+            }
+        }
+        return valid;
     }
-    //判断动作状态，这一步能不能下
+    //判断动作状态，这一步能不能下(包含33禁)
 
     public void handleMove(Move move, Tool player) {
         int r = move.getRow();
@@ -111,6 +149,12 @@ public class Board {
             }
         }
     }
+
+    public Tool[][] getBoard(){
+        return board;
+    }
+    //不知道会不会返回空的
+
 }
 
 //针对棋盘状态的类，有状态，有动作

@@ -3,7 +3,8 @@ public class Gomoku {
     private Board board = new Board();
     private Tool[] ChessX = new Tool[Board.SIZE];
     private Tool[] ChessY = new Tool[Board.SIZE];
-    //此处加一个写入，board加了一个不知道这里要不要
+    //undo
+    //此处还加一个鼠标写入，board加了一个不知道这里要不要
 
     private void randomFirstPlayer(){
         player1 = Tool.BLACK;
@@ -22,19 +23,19 @@ public class Gomoku {
 
     private void showGameResult(){
         if (board.isGameWon()){
-            //显示
+            //显示的语句
         }
         else if (board.isFull()){
-            //显示
+            //显示的语句
         }
         //加一个显示错误信息
     }
 
-    private Move getAValidMove(){
+    private Move getAValidMove(Tool tool){
         Move move = null;
         while (true){
             try {
-                move = new Move(2,2);
+                move = new Move(2,2, tool);
                 //瞎搞的数据，要换成写入
 
                 if (board.isValid(move)){
@@ -52,12 +53,18 @@ public class Gomoku {
         Move move = null;
 
         if (playerOnTurn == player1){
-            move = getAValidMove();
+            move = getAValidMove(player1);
         }
-        else move = getAValidMove();
+        else move = getAValidMove(player2);
 
         return move;
     }
     //动作，得到玩家的棋子
+
+
+
+    private void play(){
+
+    }
 }
 
