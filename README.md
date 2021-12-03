@@ -21,3 +21,4 @@ Undo在board或者gomoku里做
 
 Board针对棋盘状态的类，有状态，有动作
 
+GomokuGame启动游戏
