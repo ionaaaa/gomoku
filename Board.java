@@ -1,10 +1,11 @@
 public class Board {
-    public static final int SIZE = 11;
+    public static final int SIZE = 19;
     //要加别的size
     private Tool[][] board = new Tool[SIZE][SIZE];
-    int x = (int)(StdDraw.mouseX());
-    int y = (int)(StdDraw.mouseY());
-    //瞎写的，要写具体换算关系
+    private int x = (int) (StdDraw.mouseX() / 0.05);
+    private int y = (int) (StdDraw.mouseY() / 0.05);
+    private Gomoku gomoku;
+
 
     public int checkCount(int xChange, int yChange, Tool tool){
         int count = 1;
@@ -150,11 +151,67 @@ public class Board {
         }
     }
 
+    public void show(){
+        StdDraw.setPenColor(StdDraw.BOOK_BLUE);
+        StdDraw.filledRectangle(0.70, 0.750, 0.25, 0.06);
+        StdDraw.filledRectangle(0.70, 0.550, 0.25, 0.06);
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.setFont();
+        StdDraw.text(0.70, 0.750, "Play With People ");
+        StdDraw.text(0.70, 0.550, "Exit");
+
+        while (true) {
+            if ((StdDraw.mouseX() >= 0.60) && (StdDraw.isMousePressed()) && (StdDraw.mouseX() <= 0.90) && (StdDraw.mouseY() <= 0.90) && (StdDraw.mouseY() >= 0.60)) {
+                StdDraw.setPenColor(StdDraw.ORANGE);
+                StdDraw.filledRectangle(0.50, 0.50, 0.5, 0.50);
+                StdDraw.setPenColor(StdDraw.BLACK);
+                for (double i = 0.05; i < 1; i += 0.05) {
+                    StdDraw.line(i, 1, i, 0);
+                    StdDraw.line(1, i, 0, i);
+                }
+
+                StdDraw.setPenColor(StdDraw.BLACK);
+                StdDraw.filledCircle(0.50, 0.85, 0.005);
+                StdDraw.filledCircle(0.15, 0.85, 0.005);
+                StdDraw.filledCircle(0.85, 0.15, 0.005);
+                StdDraw.filledCircle(0.50, 0.15, 0.005);
+                StdDraw.filledCircle(0.15, 0.15, 0.005);
+                StdDraw.filledCircle(0.85, 0.85, 0.005);
+                StdDraw.filledCircle(0.50, 0.50, 0.005);
+                StdDraw.filledCircle(0.15, 0.50, 0.005);
+                StdDraw.filledCircle(0.85, 0.50, 0.005);
+                StdDraw.setPenColor(StdDraw.BLACK);
+                break;
+            }
+        }
+    }
+    //画棋盘
+
     public Tool[][] getBoard(){
         return board;
     }
-    //不知道会不会返回空的
+    //返回棋盘信息，不知道会不会返回空的
 
+    public void drawChess(Tool tool){
+        if (tool == Tool.BLACK){
+            StdDraw.setPenColor(StdDraw.BLACK);
+            StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
+        }
+        if (tool == Tool.WHITE){
+            StdDraw.setPenColor(StdDraw.CYAN);
+            StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
+        }
+    }
+    //画棋子
+
+    public void setChess(Tool tool){
+        if (tool == Tool.BLACK){
+            board[x][y] = Tool.BLACK;
+        }
+        if (tool == Tool.WHITE){
+            board[x][y] = Tool.WHITE;
+        }
+    }
 }
 
 //针对棋盘状态的类，有状态，有动作

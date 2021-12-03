@@ -3,11 +3,11 @@ public class gomaku2 {
     public static boolean isMousePressed() throws InterruptedException {
         if (!StdDraw.isMousePressed()) {
             return false;
-        }
-        else
+        } else
             Thread.sleep(90);
         return StdDraw.isMousePressed();
     }
+
     public static void main(String[] args) throws InterruptedException {
         StdDraw.setPenColor(StdDraw.BOOK_BLUE);
         StdDraw.filledRectangle(0.70, 0.750, 0.25, 0.06);
@@ -41,26 +41,53 @@ public class gomaku2 {
                 break;
             }
         }
+        //已用
 
 
         while (true) {
             if ((StdDraw.mouseX() % 0.05 <= 0.03) && (StdDraw.mouseY() % 0.05 <= 0.03)
                     && (StdDraw.mouseX() > 0.04) && (StdDraw.mouseY() > 0.04)
                     && (StdDraw.mouseX() < 0.96) && (StdDraw.mouseY() < 0.96)) {
-                int x = 0;
-                int y = 0;
-                x = (int) (StdDraw.mouseX() / 0.05);
-                y = (int) (StdDraw.mouseY() / 0.05);
+
                 int i = 0;
-                while(isMousePressed()){
-                    StdDraw.setPenColor(StdDraw.BLACK);
-                    StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
-                    i++;
+
+                while (isMousePressed()) {
+                    int x = 0;
+                    int y = 0;
+                    x = (int) (StdDraw.mouseX() / 0.05);
+                    y = (int) (StdDraw.mouseY() / 0.05);
+                    if (i / 2 == 0) {
+                        StdDraw.setPenColor(StdDraw.BLACK);
+                        StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
+                        i++;
+                    }
+                    if (i / 2 == 1) {
+                        StdDraw.setPenColor(StdDraw.CYAN);
+                        StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
+                        i++;
+                    }
                 }
-                if(i==1){
-                    StdDraw.setPenColor(StdDraw.CYAN);
-                    StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
-                }
+//                Gomoku gomoku = new Gomoku();
+//                Board board = new Board();
+//                gomoku.randomFirstPlayer();
+//
+//                while(isMousePressed()){
+//                    board.drawChess(gomoku.oppositePlayer());
+//                }
+
+
+
+
+            }
+        }
+    }
+}
+
+
+
+
+
+
 //                while (isMousePressed()) {
 //                    i++;
 //                    System.out.println(i);
@@ -71,7 +98,4 @@ public class gomaku2 {
 //                    }
 //                    StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
 //                }
-            }
-        }
-    }
-}
+
