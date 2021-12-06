@@ -45,8 +45,7 @@ public class Gomoku {
         Move move = null;
         while (true){
             try {
-                move = new Move(2,2, tool);
-                //瞎搞的数据，要换成写入
+                move = new Move(x,y, tool);
 
                 if (board.isValid(move)){
                     return move;
@@ -71,12 +70,36 @@ public class Gomoku {
     }
     //动作，得到玩家的棋子
 
+    public void mousePressed(boolean p){
+        if (p){
+            if (canPlay){
+                Move move = getAMove();
+                board.handleMove(move, playerOnTurn);
+            }
+            board.drawChess(player1);
+            board.drawChess(player2);
+            if (board.isGameWon() || board.isFull()){
+                canPlay = false;
+            }else playerOnTurn = oppositePlayer();
+            showGameResult();
+        }
+    }
+
 
 
 
     public void play(){
+        GameController gameController = new GameController();
+        board.clear();
         board.show();
-        //从这里
+        randomFirstPlayer();
+        while (StdDraw.isMousePressed()){
+            mousePressed(StdDraw.isMousePressed());
+        }
+
+
+
+
     }
 }
 

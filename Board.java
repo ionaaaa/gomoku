@@ -193,25 +193,31 @@ public class Board {
     //返回棋盘信息，不知道会不会返回空的
 
     public void drawChess(Tool tool){
-        if (tool == Tool.BLACK){
-            StdDraw.setPenColor(StdDraw.BLACK);
-            StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
-        }
-        if (tool == Tool.WHITE){
-            StdDraw.setPenColor(StdDraw.CYAN);
-            StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
+        for (int i = 0; i < Board.SIZE; i++) {
+            for (int j = 0; j < Board.SIZE; j++) {
+                if (tool == Tool.BLACK) {
+                    StdDraw.setPenColor(StdDraw.BLACK);
+                    StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
+                }
+                if (tool == Tool.WHITE) {
+                    StdDraw.setPenColor(StdDraw.CYAN);
+                    StdDraw.filledCircle(x * 0.05, y * 0.05, 0.015);
+                }
+            }
         }
     }
     //画棋子
 
-    public void setChess(Tool tool){
-        if (tool == Tool.BLACK){
-            board[x][y] = Tool.BLACK;
-        }
-        if (tool == Tool.WHITE){
-            board[x][y] = Tool.WHITE;
-        }
+    public static boolean isMousePressed() throws InterruptedException {
+        if (!StdDraw.isMousePressed()) {
+            return false;
+        } else
+            Thread.sleep(90);
+        return StdDraw.isMousePressed();
     }
+
+
+
 }
 
 //针对棋盘状态的类，有状态，有动作
