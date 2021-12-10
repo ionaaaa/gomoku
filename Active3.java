@@ -18,7 +18,7 @@
 //        this.c3 = c3;
 //        this.sidelength = sidelength;
 //    }
-//
+// 
 //    public boolean X3(){
 //        isX3 = false;
 //        ArrayList<Chess> chesses = new ArrayList<>();
